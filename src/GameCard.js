@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { Card, CardMedia, CardActionArea, CardContent, Typography } from '@material-ui/core';
 
 export function GameCard({ app: { name, developer, js, thumbnail }, onPlay }) {
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, margin: "12px" }}>
             <CardActionArea onClick={() => { onPlay(js) }}>
                 <CardMedia
                     sx={{ height: 200, width: 300 }}

@@ -12,7 +12,7 @@ export async function getApps() {
     return parse(text).apps;
 }
 
-export async function filterApps(apps) {
+export function filterApps(apps) {
     return apps.filter(
         location.hash === '#dev' ?
             (({ main, dev }) => main || dev) :

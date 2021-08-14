@@ -20,7 +20,7 @@ export function respawnFrame() {
 
     iframe.id = 'security-sandbox-iframe';
     iframe.allow = 'xr-spatial-tracking';
-    iframe.sandbox = 'allow-same-origin allow-scripts allow-modals'
+    iframe.sandbox = 'allow-scripts allow-modals'
     iframe.src = window.location.href;
 
     document.body.prepend(iframe);
@@ -30,10 +30,8 @@ export function respawnFrame() {
 
 export function useMessageHandler(handler) {
     useEffect(() => {
-        function handleMessage({ origin, data }) {
-            if (origin === window.location.origin) {
-                handler(data);
-            }
+        function handleMessage({ data }) {
+            handler(data);
         }
 
         window.addEventListener('message', handleMessage);
@@ -42,7 +40,9 @@ export function useMessageHandler(handler) {
 }
 
 export function sendMessage(message) {
-    const target = window.parent === window ? document.querySelector('#security-sandbox-iframe') : window.parent;
+    if (process.env.NODE_ENV === 'development') { return; }
 
-    target.postMessage(message, window.location.origin);
+    const target = window.parent === window ? document.querySelector('#security-sandbox-iframe').contentWindow : window.parent;
+
+    target.postMessage(message, '*');
 }
