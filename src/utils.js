@@ -5,11 +5,19 @@ import { appsStub } from './dev-sandboxed-apps.stub'
 
 export async function getApps() {
     if (process.env.NODE_ENV === 'development') {
-        return appsStub;
+        return appsStub.apps;
     }
 
     const res = await fetch('/vr-apps-catalog/apps.yml'), text = await res.text();
     return parse(text).apps;
+}
+
+export async function filterApps(apps) {
+    return apps.filter(
+        location.hash === '#dev' ?
+            (({ main, dev }) => main || dev) :
+            (({ main }) => main)
+    );
 }
 
 export async function runGame(js) {

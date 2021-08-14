@@ -4,11 +4,11 @@ import { Grid } from '@material-ui/core';
 import { sendMessage } from './SecuritySandbox';
 import { GameCard } from './GameCard';
 
-import { getApps, runGame } from './utils';
+import { getApps, filterApps, runGame } from './utils';
 
 export function Sandboxed() {
     const [apps, setApps] = useState(null);
-    useEffect(() => { getApps().then(setApps); }, []);
+    useEffect(() => { getApps().then(filterApps).then(setApps); }, []);
 
     if (!apps) { return null; }
 
