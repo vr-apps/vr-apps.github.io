@@ -1,0 +1,10 @@
+[submodule "vr-apps-catalog"]
+	path = vr-apps-catalog
+	url = git@github.com:vr-apps/vr-apps-catalog.git
+[submodule "enovikov11-apps"]
+	path = enovikov11-apps
+	url = git@github.com:vr-apps/enovikov11-apps.git
+[submodule "three.js"]
+	path = three.js
+	url = git@github.com:vr-apps/three.js.git
+	branch = dev
