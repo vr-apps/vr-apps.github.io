@@ -4,11 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { sendMessage, useMessageHandler } from './SecuritySandbox';
 import { GameCards } from './GameCards';
 
-import { getApps, filterApps, runGame } from './utils';
+import { getApps, processApps, runGame } from './utils';
 
 export function Sandboxed() {
     const [apps, setApps] = useState(null);
-    useEffect(() => { getApps().then(filterApps).then(setApps); }, []);
+    useEffect(() => { getApps().then(processApps).then(setApps); }, []);
 
     useMessageHandler(({ setScrollTo }) => {
         if (setScrollTo) {

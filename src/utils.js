@@ -15,12 +15,12 @@ export async function getApps() {
     return parse(text).apps;
 }
 
-export function filterApps(apps) {
+export function processApps(apps) {
     return apps.filter(
         location.hash === '#dev' ?
             (({ main, dev }) => main || dev) :
             (({ main }) => main)
-    );
+    ).sort((a, b) => a.rating > b.rating ? -1 : 1);
 }
 
 export async function runGame(js) {
