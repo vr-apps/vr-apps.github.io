@@ -42,9 +42,11 @@ export async function runGame(js) {
         optionalFeatures: ['local-floor', 'bounded-floor', 'hand-tracking', 'layers']
     });
 
-    const jsModule = await import(/* webpackIgnore: true */js);
+    const jsmRaw = await import(/* webpackIgnore: true */js);
+    const jsmExports = jsmRaw.default || jsmRaw;
+    const jsmData = jsmExports.init ? (await jsmExports.init()) : jsmExports;
 
-    await jsModule.default.renderer.xr.setSession(session);
+    await jsmData.renderer.xr.setSession(session);
 
     await new Promise(res => { session.addEventListener('end', res) });
 
