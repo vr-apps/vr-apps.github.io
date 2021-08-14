@@ -1,11 +1,14 @@
 /* eslint-disable no-restricted-globals */
 import { parse } from 'yaml';
 
-import { appsStub } from './dev-sandboxed-apps.stub'
-
 export async function getApps() {
     if (process.env.NODE_ENV === 'development') {
-        return appsStub.apps;
+        const res = await fetch('https://vr-apps.github.io/vr-apps-catalog/apps.yml'), text = await res.text();
+        return parse(text).apps.map(item => {
+            item.js = 'https://vr-apps.github.io' + item.js;
+            item.thumbnail = 'https://vr-apps.github.io' + item.thumbnail;
+            return item;
+        });
     }
 
     const res = await fetch('/vr-apps-catalog/apps.yml'), text = await res.text();
