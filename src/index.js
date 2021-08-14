@@ -9,7 +9,7 @@ import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SecuritySandbox Parent={Parent} Sandboxed={Sandboxed} />
+    {process.env.NODE_ENV === 'development' ? <Sandboxed /> : <SecuritySandbox Parent={Parent} Sandboxed={Sandboxed} />}
   </React.StrictMode>,
   document.getElementById('root')
 );

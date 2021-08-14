@@ -1,7 +1,13 @@
 /* eslint-disable no-restricted-globals */
 import { parse } from 'yaml';
 
+import { appsStub } from './dev-sandboxed-apps.stub'
+
 export async function getApps() {
+    if (process.env.NODE_ENV === 'development') {
+        return appsStub;
+    }
+
     const res = await fetch('/vr-apps-catalog/apps.yml'), text = await res.text();
     return parse(text).apps;
 }
