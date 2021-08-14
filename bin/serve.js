@@ -12,9 +12,7 @@ const SSL_PRIVKEY_PATH = process.env.SSL_PRIVKEY_PATH || '/home/enovikov11/local
 
 app.use(cors());
 
-app.use('/vr-apps-catalog', express.static(path.join(__dirname, '../../vr-apps-catalog')));
-app.use('/three.js', express.static(path.join(__dirname, '../../three.js')));
-app.use('/enovikov11-apps', express.static(path.join(__dirname, '../../enovikov11-apps')));
+app.use('/', express.static(path.join(__dirname, '../')));
 app.use('/', express.static(path.join(__dirname, '../build')));
 
 server.listen(443);

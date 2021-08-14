@@ -19,8 +19,8 @@
   "homepage": "https://vr-apps.github.io/",
   "scripts": {
     "allow": "sudo sysctl net.ipv4.ip_unprivileged_port_start=0",
-    "dev-sandboxed": "react-scripts start",
-    "prod-serve": "react-scripts build && node bin/serve",
+    "dev-ui": "react-scripts start",
+    "dev-all": "react-scripts build && node bin/serve",
     "predeploy": "react-scripts build",
     "deploy": "gh-pages -d build"
   },
